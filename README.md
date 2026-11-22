@@ -1,21 +1,16 @@
-# Labirinto-do-Tesouro
-Jogo interativo em JavaScript onde o jogador precisa descobrir o caminho seguro até o tesouro desviando de armadilhas antes que as tentativas acabem.
+# React + Vite
 
-## Objetivo
-O Labirinto do Tesouro é um jogo de tabuleiro interativo onde o jogador precisa explorar uma grade, descobrir o caminho seguro até o tesouro e evitar armadilhas ocultas usando um número limitado de tentativas.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## Tecnologias
-HTML, CSS e JavaScript.
+Currently, two official plugins are available:
 
-## Funcionalidades
-**Já funciona:**
-- Estrutura inicial da página e do tabuleiro.
-- Primeira interação em JavaScript ao clicar nos espaços do tabuleiro.
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
-**Em desenvolvimento:**
-- Lógica completa do caminho seguro e posicionamento das armadilhas.
-- Contador de tentativas (vidas) e telas de vitória/derrota.
-- Botão de reiniciar partida.
+## React Compiler
 
-## Como executar
-Abra o arquivo `index.html` no navegador.
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+
+## Expanding the ESLint configuration
+
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
