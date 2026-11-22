@@ -1,5 +1,9 @@
 import { useState } from "react";
-import { criarTabuleiro, TENTATIVAS } from "./logic/mapa";
+import {
+  criarTabuleiro,
+  obterDicaProximidade,
+  TENTATIVAS,
+} from "./logic/mapa";
 import {
   carregarHistorico,
   salvarHistorico,
@@ -10,10 +14,11 @@ import { FormularioJogador } from "./components/FormularioJogador/FormularioJoga
 import { Placar } from "./components/Placar/Placar";
 import { Tabuleiro } from "./components/Tabuleiro/Tabuleiro";
 import { Ranking } from "./components/Ranking/Ranking";
+import { Rodape } from "./components/Rodape/Rodape";
 import styles from "./App.module.css";
 
 const MENSAGEM_INICIAL =
-  "Clique nas casas para encontrar o caminho até o tesouro!";
+  "Clique nas casas para explorar o labirinto e seguir as dicas até o tesouro!";
 
 export default function App() {
   const [jogador, setJogador] = useState("");
@@ -28,6 +33,7 @@ export default function App() {
       id: Date.now(),
       nome: jogador,
       tentativas: tentativasRestantes,
+      maxTentativas: TENTATIVAS,
       resultado,
     };
 
@@ -59,12 +65,11 @@ export default function App() {
     const casaClicada = casas[id];
     if (casaClicada.revelada) return;
 
-    const novasCasas = casas.map((casa) =>
-      casa.id === id ? { ...casa, revelada: true } : casa,
-    );
-    setCasas(novasCasas);
-
     if (casaClicada.tipo === "tesouro") {
+      const novasCasas = casas.map((casa) =>
+        casa.id === id ? { ...casa, revelada: true } : casa,
+      );
+      setCasas(novasCasas);
       setMensagem(`🎉 Parabéns, ${jogador}! Você encontrou o tesouro!`);
       setFimDeJogo(true);
       registrarPartida("Vitória", tentativas);
@@ -73,14 +78,36 @@ export default function App() {
       setTentativas(novasTentativas);
 
       if (novasTentativas === 0) {
-        setMensagem(`💀 Game Over, ${jogador}! Suas tentativas acabaram.`);
+        // Revela a armadilha clicada e mostra onde o tesouro estava escondido
+        const novasCasas = casas.map((casa) =>
+          casa.id === id || casa.tipo === "tesouro"
+            ? { ...casa, revelada: true }
+            : casa,
+        );
+        setCasas(novasCasas);
+        setMensagem(
+          `💀 Game Over, ${jogador}! Suas tentativas acabaram. O tesouro foi revelado no mapa.`,
+        );
         setFimDeJogo(true);
         registrarPartida("Derrota", 0);
       } else {
-        setMensagem("💥 Você caiu em uma armadilha! Tente outra casa.");
+        const novasCasas = casas.map((casa) =>
+          casa.id === id ? { ...casa, revelada: true } : casa,
+        );
+        setCasas(novasCasas);
+        const textoTentativas =
+          novasTentativas === 1 ? "tentativa" : "tentativas";
+        setMensagem(
+          `💥 Você caiu em uma armadilha! Restam ${novasTentativas} ${textoTentativas}.`,
+        );
       }
     } else {
-      setMensagem("✅ Caminho seguro! Continue explorando.");
+      const novasCasas = casas.map((casa) =>
+        casa.id === id ? { ...casa, revelada: true } : casa,
+      );
+      setCasas(novasCasas);
+      const dica = obterDicaProximidade(id, novasCasas);
+      setMensagem(`✅ Caminho seguro! ${dica}`);
     }
   }
 
@@ -105,10 +132,15 @@ export default function App() {
             aoReiniciar={reiniciarJogo}
             aoTrocarJogador={trocarJogador}
           />
-          <Tabuleiro casas={casas} aoClicarCasa={lidarComClique} />
+          <Tabuleiro
+            casas={casas}
+            fimDeJogo={fimDeJogo}
+            aoClicarCasa={lidarComClique}
+          />
         </>
       )}
       <Ranking historico={historico} aoLimpar={limparHistorico} />
+      <Rodape />
     </main>
   );
 }

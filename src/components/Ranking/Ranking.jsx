@@ -40,7 +40,7 @@ export function Ranking({ historico, aoLimpar }) {
               <tr key={registro.id}>
                 <td className={styles.nome}>{registro.nome}</td>
                 <td>
-                  ❤️ {registro.tentativas}/{TENTATIVAS}
+                  ❤️ {registro.tentativas}/{registro.maxTentativas ?? TENTATIVAS}
                 </td>
                 <td>
                   <span
