@@ -1,0 +1,236 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background-color: rgba(2, 6, 23, 0.72);
+  backdrop-filter: blur(6px);
+  animation: fadeIn 0.22s ease-out;
+}
+
+.modal {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+  border: 1px solid #334155;
+  border-radius: 16px;
+  padding: 1.75rem 1.5rem 1.5rem;
+  text-align: center;
+  box-shadow: 0 24px 56px rgba(0, 0, 0, 0.55);
+  animation: popIn 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.vitoria {
+  border-color: rgba(250, 204, 21, 0.45);
+  box-shadow:
+    0 24px 56px rgba(0, 0, 0, 0.55),
+    0 0 36px rgba(234, 179, 8, 0.16);
+}
+
+.derrota {
+  border-color: rgba(248, 113, 113, 0.45);
+  box-shadow:
+    0 24px 56px rgba(0, 0, 0, 0.55),
+    0 0 36px rgba(220, 38, 38, 0.16);
+}
+
+.botaoFechar {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.85rem;
+  width: 32px;
+  height: 32px;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  background-color: rgba(15, 23, 42, 0.75);
+  color: #94a3b8;
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.botaoFechar:hover {
+  color: #f8fafc;
+  border-color: #64748b;
+  background-color: #334155;
+}
+
+.iconeWrapper {
+  width: 68px;
+  height: 68px;
+  margin: 0 auto 0.9rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(30, 41, 59, 0.9);
+  border: 2px solid #334155;
+  animation: flutuar 2.4s ease-in-out infinite;
+}
+
+.vitoria .iconeWrapper {
+  background-color: rgba(234, 179, 8, 0.15);
+  border-color: rgba(250, 204, 21, 0.55);
+}
+
+.derrota .iconeWrapper {
+  background-color: rgba(220, 38, 38, 0.15);
+  border-color: rgba(248, 113, 113, 0.55);
+}
+
+.icone {
+  font-size: 2rem;
+}
+
+.etiqueta {
+  display: inline-block;
+  padding: 0.22rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 0.65rem;
+}
+
+.vitoria .etiqueta {
+  background-color: rgba(22, 163, 74, 0.2);
+  color: #4ade80;
+}
+
+.derrota .etiqueta {
+  background-color: rgba(220, 38, 38, 0.2);
+  color: #f87171;
+}
+
+.titulo {
+  margin: 0 0 0.5rem;
+  font-size: 1.45rem;
+  color: #f8fafc;
+}
+
+.descricao {
+  margin: 0 0 1.2rem;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: #cbd5e1;
+}
+
+.estatisticas {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.65rem;
+  margin-bottom: 1.35rem;
+}
+
+.cardStat {
+  background-color: rgba(15, 23, 42, 0.75);
+  border: 1px solid #334155;
+  border-radius: 10px;
+  padding: 0.65rem 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.statRotulo {
+  font-size: 0.75rem;
+  color: #94a3b8;
+}
+
+.statValor {
+  font-size: 1rem;
+  color: #f8fafc;
+}
+
+.acoes {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.botaoIniciar,
+.botaoPlacar {
+  width: 100%;
+  border-radius: 8px;
+  padding: 0.7rem 1rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.botaoIniciar {
+  background-color: #16a34a;
+  color: #ffffff;
+  border: none;
+  box-shadow: 0 6px 16px rgba(22, 163, 74, 0.28);
+}
+
+.botaoIniciar:hover {
+  background-color: #15803d;
+  transform: translateY(-1px);
+}
+
+.botaoIniciar:active,
+.botaoPlacar:active {
+  transform: scale(0.98);
+}
+
+.botaoPlacar {
+  background-color: #1e293b;
+  color: #e2e8f0;
+  border: 1px solid #475569;
+}
+
+.botaoPlacar:hover {
+  background-color: #334155;
+  border-color: #60a5fa;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes flutuar {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}

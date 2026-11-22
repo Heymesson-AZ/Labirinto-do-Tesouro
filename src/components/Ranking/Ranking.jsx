@@ -1,7 +1,7 @@
 import { TENTATIVAS } from "../../logic/mapa";
 import styles from "./Ranking.module.css";
 
-export function Ranking({ historico, aoLimpar }) {
+export function Ranking({ historico, aoLimpar, destaque = false, ref }) {
   // Ordena vitórias primeiro (com mais tentativas restantes no topo) e derrotas abaixo
   const ordenado = [...historico].sort((a, b) => {
     if (a.resultado !== b.resultado) {
@@ -14,7 +14,10 @@ export function Ranking({ historico, aoLimpar }) {
   });
 
   return (
-    <section className={styles.ranking}>
+    <section
+      ref={ref}
+      className={`${styles.ranking} ${destaque ? styles.destaque : ""}`}
+    >
       <div className={styles.cabecalho}>
         <h2 className={styles.titulo}>🏆 Placar de Jogadores</h2>
         {historico.length > 0 && (

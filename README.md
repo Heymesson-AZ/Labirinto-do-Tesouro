@@ -20,7 +20,8 @@ O **Labirinto do Tesouro** é um jogo de tabuleiro interativo feito com React on
 - **Regras, dicas e feedback em tempo real:** contador de tentativas restantes (`10` por partida), dicas de proximidade (*muito quente*, *quente*, *morno* e *frio*) ao encontrar caminhos seguros, revelação do tesouro em caso de Game Over e detecção automática de vitória ou derrota.
 - **Reinício rápido:** botão **Reiniciar** que gera um novo tabuleiro embaralhado mantendo o jogador atual.
 - **Placar de jogadores (`Ranking`):** salva automaticamente cada partida no `localStorage` com nome do jogador, tentativas restantes e resultado (**Vitória** ou **Derrota**), ordenado por melhor desempenho e com botão para limpar o histórico.
-- **Rodapé institucional:** apresentação do projeto, créditos do desenvolvedor e link direto para o repositório no GitHub.
+- **Modal interativa de fim de partida:** ao vencer ou sofrer Game Over, exibe o resultado com estatísticas da partida e ações rápidas para **Iniciar nova partida** ou **Ver placar**.
+- **Rodapé institucional de página web:** visível na tela inicial (oculto durante a partida), com apresentação do projeto, tecnologias utilizadas, créditos do desenvolvedor e link direto para o repositório no GitHub.
 - **Interface centralizada e responsiva:** layout escuro com largura alinhada entre cabeçalho, controles, tabuleiro, placar e rodapé, adaptando o tamanho dos quadrados automaticamente ao número de colunas.
 
 ## Como jogar
@@ -39,6 +40,7 @@ src/
 ├── components/
 │   ├── Cabecalho/          # Título e instruções do jogo
 │   ├── FormularioJogador/  # Entrada do nome do jogador
+│   ├── ModalResultado/     # Modal interativa com resultado e ações ao fim do jogo
 │   ├── Placar/             # Jogador atual, tentativas, reiniciar e mensagem
 │   ├── Quadrado/           # Célula individual do tabuleiro
 │   ├── Ranking/            # Placar geral com histórico de partidas
