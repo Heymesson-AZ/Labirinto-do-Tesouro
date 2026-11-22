@@ -1,0 +1,19 @@
+.cabecalho {
+  text-align: center;
+  width: 100%;
+  max-width: 480px;
+}
+
+.titulo {
+  font-size: 2rem;
+  color: #f8fafc;
+  margin: 0 0 0.5rem 0;
+}
+
+.instrucao {
+  font-size: 0.95rem;
+  color: #94a3b8;
+  max-width: 460px;
+  margin: 0 auto;
+  line-height: 1.4;
+}

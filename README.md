@@ -1,16 +1,79 @@
-# React + Vite
+# 🗺️ Labirinto do Tesouro
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Objetivo
 
-Currently, two official plugins are available:
+O **Labirinto do Tesouro** é um jogo de tabuleiro interativo feito com React onde o jogador precisa explorar uma grade oculta, encontrar o tesouro (`💎`) e evitar armadilhas (`💣`) antes que suas tentativas acabem.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Tecnologias
 
-## React Compiler
+- React 19
+- JavaScript (ES Modules)
+- HTML5
+- CSS Modules
+- Vite
+- Web Storage API (`localStorage`)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Funcionalidades
 
-## Expanding the ESLint configuration
+- **Identificação do jogador:** formulário inicial para informar o nome antes de jogar e opção de **Trocar jogador** a qualquer momento.
+- **Tabuleiro dinâmico e embaralhado:** grade configurável via `TAMANHOMAPA` (atualmente `8×8`), com embaralhamento uniforme (algoritmo Fisher-Yates) das posições do tesouro, das casas seguras e das armadilhas a cada nova partida.
+- **Regras e feedback em tempo real:** contador de tentativas restantes (`5` por partida), mensagens de status a cada jogada e detecção automática de vitória ou Game Over.
+- **Reinício rápido:** botão **Reiniciar** que gera um novo tabuleiro embaralhado mantendo o jogador atual.
+- **Placar de jogadores (`Ranking`):** salva automaticamente cada partida no `localStorage` com nome do jogador, tentativas restantes e resultado (**Vitória** ou **Derrota**), ordenado por melhor desempenho e com botão para limpar o histórico.
+- **Interface centralizada e responsiva:** layout escuro com largura alinhada entre cabeçalho, controles, tabuleiro e placar, adaptando o tamanho dos quadrados automaticamente ao número de colunas.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Como jogar
+
+1. Digite seu nome e clique em **Começar**.
+2. A casa inicial (`🚩`) começa revelada no canto superior esquerdo.
+3. Clique nas casas ocultas para descobrir o que há escondido:
+   - `✅` **Caminho seguro:** você continua explorando sem perder tentativas.
+   - `💣` **Armadilha:** você perde `1` tentativa. Se chegar a `0`, é **Game Over**.
+   - `💎` **Tesouro:** você vence a partida e seu resultado é salvo no **Placar de Jogadores**.
+
+## Estrutura do projeto
+
+```text
+src/
+├── components/
+│   ├── Cabecalho/          # Título e instruções do jogo
+│   ├── FormularioJogador/  # Entrada do nome do jogador
+│   ├── Placar/             # Jogador atual, tentativas, reiniciar e mensagem
+│   ├── Quadrado/           # Célula individual do tabuleiro
+│   ├── Ranking/            # Placar geral com histórico de partidas
+│   └── Tabuleiro/          # Grade dinâmica de quadrados
+├── logic/
+│   ├── mapa.js             # Configuração do mapa e embaralhamento do tabuleiro
+│   └── ranking.js          # Leitura e salvamento do histórico no localStorage
+├── App.jsx                 # Estado principal e regras do jogo
+├── App.module.css          # Layout principal centralizado
+├── index.css               # Estilos globais
+└── main.jsx                # Ponto de entrada da aplicação
+```
+
+## Como executar
+
+1. Clone o repositório:
+
+   ```bash
+   git clone https://github.com/Heymesson-AZ/Labirinto-do-Tesouro.git
+   cd Labirinto-do-Tesouro
+   ```
+
+2. Instale as dependências:
+
+   ```bash
+   npm install
+   ```
+
+3. Inicie o servidor de desenvolvimento:
+
+   ```bash
+   npm run dev
+   ```
+
+4. Para gerar a versão de produção:
+
+   ```bash
+   npm run build
+   ```
