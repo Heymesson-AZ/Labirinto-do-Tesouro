@@ -4,8 +4,10 @@ export function Placar({
   jogador,
   tentativas,
   mensagem,
+  fimDeJogo,
   aoReiniciar,
   aoTrocarJogador,
+  aoAbrirResultado,
 }) {
   return (
     <section className={styles.placar}>
@@ -21,9 +23,19 @@ export function Placar({
         <span className={styles.tentativas}>
           ❤️ Tentativas: <strong>{tentativas}</strong>
         </span>
-        <button className={styles.botaoReiniciar} onClick={aoReiniciar}>
-          🔄 Reiniciar
-        </button>
+        <div className={styles.acoes}>
+          {fimDeJogo && (
+            <button
+              className={styles.botaoResultado}
+              onClick={aoAbrirResultado}
+            >
+              🏆 Placar
+            </button>
+          )}
+          <button className={styles.botaoReiniciar} onClick={aoReiniciar}>
+            🔄 Reiniciar
+          </button>
+        </div>
       </div>
       <p className={styles.mensagem}>{mensagem}</p>
     </section>

@@ -22,6 +22,31 @@
   text-align: center;
   box-shadow: 0 24px 56px rgba(0, 0, 0, 0.55);
   animation: popIn 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: max-width 0.2s ease;
+}
+
+.modalLargo {
+  max-width: 480px;
+}
+
+.visaoPlacar {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  text-align: left;
+}
+
+.tituloPlacar {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #f8fafc;
+  text-align: center;
+}
+
+.acoesPlacar {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
 }
 
 .vitoria {

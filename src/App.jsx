@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import {
   criarTabuleiro,
   obterDicaProximidade,
@@ -30,9 +30,7 @@ export default function App() {
   const [fimDeJogo, setFimDeJogo] = useState(false);
   const [resultadoPartida, setResultadoPartida] = useState(null);
   const [modalAberta, setModalAberta] = useState(false);
-  const [destacarRanking, setDestacarRanking] = useState(false);
   const [historico, setHistorico] = useState(carregarHistorico);
-  const rankingRef = useRef(null);
 
   function registrarPartida(resultado, tentativasRestantes) {
     const novoRegistro = {
@@ -63,22 +61,6 @@ export default function App() {
   function limparHistorico() {
     setHistorico([]);
     limparHistoricoStorage();
-  }
-
-  function verPlacar() {
-    setModalAberta(false);
-    setDestacarRanking(true);
-
-    requestAnimationFrame(() => {
-      rankingRef.current?.scrollIntoView({
-        behavior: "smooth",
-        block: "center",
-      });
-    });
-
-    window.setTimeout(() => {
-      setDestacarRanking(false);
-    }, 1800);
   }
 
   function lidarComClique(id) {
@@ -155,15 +137,20 @@ export default function App() {
       <main className={styles.container}>
         <Cabecalho />
         {!jogador ? (
-          <FormularioJogador aoIniciar={iniciarJogo} />
+          <>
+            <FormularioJogador aoIniciar={iniciarJogo} />
+            <Ranking historico={historico} aoLimpar={limparHistorico} />
+          </>
         ) : (
           <>
             <Placar
               jogador={jogador}
               tentativas={tentativas}
               mensagem={mensagem}
+              fimDeJogo={fimDeJogo}
               aoReiniciar={reiniciarJogo}
               aoTrocarJogador={trocarJogador}
+              aoAbrirResultado={() => setModalAberta(true)}
             />
             <Tabuleiro
               casas={casas}
@@ -172,15 +159,9 @@ export default function App() {
             />
           </>
         )}
-        <Ranking
-          ref={rankingRef}
-          historico={historico}
-          aoLimpar={limparHistorico}
-          destaque={destacarRanking}
-        />
       </main>
 
-      {!jogador && <Rodape />}
+      <Rodape />
 
       <ModalResultado
         aberto={modalAberta}
@@ -188,8 +169,9 @@ export default function App() {
         jogador={jogador}
         tentativas={tentativas}
         jogadas={jogadas}
+        historico={historico}
+        aoLimparHistorico={limparHistorico}
         aoIniciar={reiniciarJogo}
-        aoVerPlacar={verPlacar}
         aoFechar={() => setModalAberta(false)}
       />
     </div>
